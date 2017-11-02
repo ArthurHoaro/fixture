@@ -191,7 +191,7 @@ $driver = new Codesleeve\Fixture\Drivers\Standard($db);
 
 // Create a configuration array.  
 $config = array(
-	'location' => 'path/to/your/fixtures.php'	// The directory you wish to load fixture files from.
+	'location' => 'path/to/your/fixtures/'	// The directory you wish to load fixture files from.
 );
 
 // Fixture implements a singleton pattern.

@@ -23,14 +23,14 @@ class Fixture
     /**
      * An array of configuration options.
      *
-     * @var Array
+     * @var array
      */
     protected $config;
 
     /**
      * The ORM specific database driver that's being used.
      *
-     * @var Driver
+     * @var DriverInterface
      */
     protected $driver;
 
@@ -47,7 +47,7 @@ class Fixture
      *
      * @param  array $config
      * @param  DriverInterface $driver
-     * @return Singleton The *Singleton* instance.
+     * @return Fixture The *Singleton* instance.
      */
     public static function getInstance(array $config = array(), DriverInterface $driver = null)
     {
@@ -102,7 +102,7 @@ class Fixture
      * Setter method for the configuration array used by
      * the fixture.
      *
-     * @param Array $configArray
+     * @param array $configArray
      */
     public function setConfig($configArray)
     {

@@ -34,6 +34,8 @@ class Standard extends BaseDriver implements DriverInterface
      * @param  string $tableName
      * @param  array $records
      * @return array
+     *
+     * @throws \Exception
      */
     public function buildRecords($tableName, array $records)
     {
@@ -53,7 +55,9 @@ class Standard extends BaseDriver implements DriverInterface
             $sql = "INSERT INTO $tableName ($fields) VALUES ($placeholders)";
 
             $sth = $this->db->prepare($sql);
-            $sth->execute($values);
+            if ($sth->execute($values) === false) {
+                throw new \Exception(implode(' - ', $sth->errorInfo()));
+            }
 
             $insertedRecords[$recordName] = (object) $recordValues;
         }
