@@ -61,7 +61,7 @@ class Standard extends BaseDriver implements DriverInterface
                 $error .= '-------------------------------------------------------------'. PHP_EOL;
                 $error .= $sql . PHP_EOL;
                 $error .= '-------------------------------------------------------------'. PHP_EOL;
-                $error .= implode(' - ', $sth->errorInfo());
+                $error .= implode(' - ', $sth->errorInfo()) . PHP_EOL;
                 $error .= '-------------------------------------------------------------'. PHP_EOL;
                 throw new InvalidFixtureDataException($error);
             }
