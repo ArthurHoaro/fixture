@@ -79,7 +79,7 @@ class Standard extends BaseDriver implements DriverInterface
             if ($this->endsWith($key, '_fk')) {
                 $value = $this->generateKey($value);
                 $values[substr($key, 0, -3)] = $value;
-                unset($key);
+                unset($values[$key]);
             }
         }
 
