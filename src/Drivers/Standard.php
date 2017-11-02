@@ -1,5 +1,6 @@
 <?php namespace Codesleeve\Fixture\Drivers;
 
+use Codesleeve\Fixture\Exceptions\InvalidFixtureDataException;
 use PDO;
 
 class Standard extends BaseDriver implements DriverInterface
@@ -56,7 +57,13 @@ class Standard extends BaseDriver implements DriverInterface
 
             $sth = $this->db->prepare($sql);
             if ($sth->execute($values) === false) {
-                throw new \Exception(implode(' - ', $sth->errorInfo()));
+                $error  = 'Fixture Insertion Error into `'. $tableName .'`'. PHP_EOL;
+                $error .= '-------------------------------------------------------------'. PHP_EOL;
+                $error .= $sql . PHP_EOL;
+                $error .= '-------------------------------------------------------------'. PHP_EOL;
+                $error .= implode(' - ', $sth->errorInfo());
+                $error .= '-------------------------------------------------------------'. PHP_EOL;
+                throw new InvalidFixtureDataException($error);
             }
 
             $insertedRecords[$recordName] = (object) $recordValues;
