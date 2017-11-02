@@ -48,7 +48,14 @@ class Standard extends BaseDriver implements DriverInterface
             // fixture into an integer value so that related fixtures don't have to rely on
             // an auto-incremented primary key when creating foreign keys.
             $recordValues = $this->setForeignKeys($recordValues);
-            $recordValues = array_merge($recordValues, array('id' => $this->generateKey($recordName)));
+            if (isset($recordValues['__id'])) {
+                if (! empty($recordValues['__id'])) {
+                    $recordValues = array_merge($recordValues, array($recordValues['__id'] => $this->generateKey($recordName)));
+                }
+                unset($recordValues['__id']);
+            } else  {
+                $recordValues = array_merge($recordValues, array('id' => $this->generateKey($recordName)));
+            }
 
             $fields = implode(', ', array_keys($recordValues));
             $values = array_values($recordValues);
