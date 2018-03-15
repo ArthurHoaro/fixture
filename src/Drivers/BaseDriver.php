@@ -5,15 +5,16 @@ abstract class BaseDriver
     /**
      * Truncate a table.
      *
+     * @param  string $tableName
      * @return void
      */
-    public function truncate()
+    public function truncate($tableName = null)
     {
-        foreach ($this->tables as $table) {
+        $tables = ! empty($tableName) ? [$tableName] : $this->tables;
+        foreach ($tables as $table) {
             $this->db->query("DELETE FROM $table");
+            unset($this->tables[$table]);
         }
-
-        $this->tables = array();
     }
 
     /**

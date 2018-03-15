@@ -313,6 +313,7 @@ class Fixture
             
         }
 
+        $this->driver->truncate($tableName);
         $this->fixtures[$tableName] = $this->driver->buildRecords($tableName, $records);
     }
 }
